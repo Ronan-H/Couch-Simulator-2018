@@ -1,0 +1,22 @@
+package ronan_hanley.galway_game_jam.nine.state;
+
+import org.newdawn.slick.BasicGame;
+import org.newdawn.slick.state.StateBasedGame;
+import org.newdawn.slick.state.transition.Transition;
+
+public class TransferableState extends BasicGameState {
+	private StateBasedGame sbg;
+	
+	public TransferableState(StateBasedGame sbg) {
+		this.sbg = sbg;
+	}
+	
+	protected void enterState(int id) {
+		sbg.enterState(id);
+	}
+	
+	protected void enterState(int id, Transition leave, Transition enter) {
+		sbg.enterState(id, leave, enter);
+	}
+	
+}

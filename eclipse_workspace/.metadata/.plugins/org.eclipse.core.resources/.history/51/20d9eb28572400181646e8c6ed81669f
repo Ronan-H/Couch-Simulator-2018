@@ -1,0 +1,5 @@
+package ronan_hanley.galway_game_jam.nine.entity;
+
+public class Entity {
+	private double x, y;
+}
