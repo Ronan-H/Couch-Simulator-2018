@@ -27,7 +27,9 @@ public abstract class TransferableState extends BasicGameState {
 	}
 
 	@Override
-	public abstract void init(GameContainer gc, StateBasedGame sbg) throws SlickException;
+	public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
+		gc.getInput().addKeyListener(input);
+	}
 
 	@Override
 	public abstract void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException;

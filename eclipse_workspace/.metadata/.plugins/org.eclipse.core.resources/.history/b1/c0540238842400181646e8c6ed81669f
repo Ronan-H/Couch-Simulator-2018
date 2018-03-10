@@ -1,0 +1,36 @@
+package ronan_hanley.galway_game_jam.nine.entity.furniture;
+
+import org.newdawn.slick.Animation;
+
+import ronan_hanley.galway_game_jam.nine.entity.MovingEntity;
+
+public abstract class Furniture extends MovingEntity {
+	private boolean isHorizontal;
+	
+	public Furniture(int initialX, int initialY, double maxSpeed, Animation anim) {
+		super(initialX, initialY, maxSpeed, anim);
+		isHorizontal = true;
+	}
+	
+	public void rotate() {
+		isHorizontal = !isHorizontal;
+		
+		int temp;
+		
+		temp = getWidth();
+		setWidth(getHeight());
+		setHeight(temp);
+		
+		float newRotAngle = (isHorizontal ? 0 : 90);
+		getAnim().getCurrentFrame().setRotation(newRotAngle);
+		
+		if (isHorizontal) {
+			
+		}
+		else {
+			changeX(getHalfHeight() - getHalfWidth());
+			changeY((getHalfWidth() - getHalfHeight()));
+		}
+	}
+	
+}

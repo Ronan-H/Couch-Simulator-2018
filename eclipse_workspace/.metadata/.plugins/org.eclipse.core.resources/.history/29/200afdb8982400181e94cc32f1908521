@@ -1,0 +1,9 @@
+package ronan_hanley.galway_game_jam.nine.entity;
+
+public class BackAndForthMovementPattern extends MovementPattern {
+	
+	public UpDownMovementPattern(Human human) {
+		super(human);
+	}
+	
+}

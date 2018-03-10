@@ -10,21 +10,34 @@ public class Input implements InputListener {
 	public boolean upHeld;
 	public boolean downHeld;
 	
+	public boolean rotateHeld;
+	private boolean rotateHeldLastTick;
+	public boolean rotateNewlyPressed;
+	
 	public void toggle(int keycode, boolean state) {
 		switch (keycode) {
-		case KEY_UP:
-			upHeld = true;
+		case KEY_W:
+			upHeld = state;
 			break;
-		case KEY_DOWN:
-			downHeld = true;
+		case KEY_S:
+			downHeld = state;
 			break;
-		case KEY_LEFT:
-			leftHeld = true;
+		case KEY_A:
+			leftHeld = state;
 			break;
-		case KEY_RIGHT:
-			rightHeld = true;
+		case KEY_D:
+			rightHeld = state;
+			break;
+		case KEY_SPACE:
+			rotateHeld = state;
 			break;
 		}
+	}
+	
+	public void tick() {
+		rotateNewlyPressed = rotateHeld && !rotateHeldLastTick;
+		
+		rotateHeldLastTick = rotateHeld;
 	}
 	
 	@Override

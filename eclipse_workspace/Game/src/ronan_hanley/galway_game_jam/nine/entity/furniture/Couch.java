@@ -5,19 +5,19 @@ import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
 public class Couch extends Furniture {
-	private static Animation couchAnim;
+	private static Animation anim;
 	
 	static {
-		couchAnim = new Animation();
+		anim = new Animation();
 		try {
-			couchAnim.addFrame(new Image("res/couch.png"), 0);
+			anim.addFrame(new Image("res/couch.png"), 1);
 		} catch (SlickException e) {
 			e.printStackTrace();
 		}
 	}
 	
 	public Couch(int initialX, int initialY) {
-		super(initialX, initialY, couchAnim);
+		super(initialX, initialY, 5, anim);
 	}
 	
 }
