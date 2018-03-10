@@ -1,0 +1,11 @@
+package ronan_hanley.galway_game_jam.nine.entity.furniture;
+
+import org.newdawn.slick.Graphics;
+
+public class Couch extends Furniture {
+
+	public Couch(int initialX, int initialY) {
+		super(initialX, initialY, 100, 40);
+	}
+	
+}

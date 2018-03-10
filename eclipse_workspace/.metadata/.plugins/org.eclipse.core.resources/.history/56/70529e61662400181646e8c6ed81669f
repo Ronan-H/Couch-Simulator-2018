@@ -1,0 +1,5 @@
+package ronan_hanley.galway_game_jam.nine;
+
+public class Input implements InputListener {
+
+}

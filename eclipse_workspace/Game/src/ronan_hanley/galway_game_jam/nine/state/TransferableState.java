@@ -7,11 +7,15 @@ import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.state.transition.Transition;
 
+import ronan_hanley.galway_game_jam.nine.Input;
+
 public abstract class TransferableState extends BasicGameState {
 	private StateBasedGame sbg;
+	protected Input input;
 	
-	public TransferableState(StateBasedGame sbg) {
+	public TransferableState(StateBasedGame sbg, Input input) {
 		this.sbg = sbg;
+		this.input = input;
 	}
 	
 	protected void enterState(int id) {
@@ -23,13 +27,13 @@ public abstract class TransferableState extends BasicGameState {
 	}
 
 	@Override
-	public abstract void init(GameContainer arg0, StateBasedGame arg1) throws SlickException;
+	public abstract void init(GameContainer gc, StateBasedGame sbg) throws SlickException;
 
 	@Override
-	public abstract void render(GameContainer arg0, StateBasedGame arg1, Graphics arg2) throws SlickException;
+	public abstract void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException;
 
 	@Override
-	public abstract void update(GameContainer arg0, StateBasedGame arg1, int arg2) throws SlickException;
+	public abstract void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException;
 
 	@Override
 	public abstract int getID();

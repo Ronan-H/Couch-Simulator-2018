@@ -1,0 +1,11 @@
+package ronan_hanley.galway_game_jam.nine.entity.furniture;
+
+import ronan_hanley.galway_game_jam.nine.entity.MovingEntity;
+
+public abstract class Furniture extends MovingEntity {
+
+	public Furniture(int initialX, int initialY, int width, int height) {
+		super(initialX, initialY, width, height);
+	}
+
+}
