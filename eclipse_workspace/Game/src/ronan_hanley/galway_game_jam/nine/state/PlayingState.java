@@ -7,8 +7,11 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Music;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.Sound;
 import org.newdawn.slick.state.StateBasedGame;
 
+import ronan_hanley.galway_game_jam.movement_pattern.BackAndForthPattern;
+import ronan_hanley.galway_game_jam.movement_pattern.LeftRightPattern;
 import ronan_hanley.galway_game_jam.movement_pattern.SpinAroundPattern;
 import ronan_hanley.galway_game_jam.movement_pattern.StaticPattern;
 import ronan_hanley.galway_game_jam.movement_pattern.UpDownPattern;
@@ -28,9 +31,12 @@ public class PlayingState extends TransferableState {
 	private Camera camera;
 	
 	private static final int spawnX = 100, spawnY = 1450;
+	//private static final int spawnX = 805, spawnY = 174; // ezpz spawn
 	
 	private Music playerMovingMusic;
 	private boolean movingMusicPlaying;
+	
+	private Sound caughtSound;
 	
 	private long ticks = 0;
 	
@@ -46,17 +52,46 @@ public class PlayingState extends TransferableState {
 		
 		furniture = new ArrayList<Furniture>();
 		humans = new ArrayList<Human>();
-		player = new Couch(100, 1450);
+		player = new Couch(spawnX, spawnY);
 		camera = new Camera(0, currentLevel.getHeight() - Game.screenHeight, player);
 		
 		humans.add(new Human(445, 1095, new UpDownPattern(445, 835)));
-		humans.add(new Human(950, 1460, new UpDownPattern(950, 457)));
+		humans.add(new Human(950, 1460, Human.DEFAULT_SPEED * 2, new UpDownPattern(950, 457), Human.DEFAULT_SIGHT_DISTANCE));
 		humans.add(new Human(567, 494, new SpinAroundPattern()));
 		humans.add(new Human(330, 434, new StaticPattern((2 * Math.PI * 0.375))));
+		humans.add(new Human(62, 158, Human.DEFAULT_SPEED / 2d, new LeftRightPattern(422, 158), Human.DEFAULT_SIGHT_DISTANCE / 2));
+		humans.add(new Human(550, 350, Human.DEFAULT_SPEED, new UpDownPattern(500, 60), Human.DEFAULT_SIGHT_DISTANCE / 3));
+		humans.add(new Human(730, 350, Human.DEFAULT_SPEED, new UpDownPattern(730, 60), Human.DEFAULT_SIGHT_DISTANCE / 3));
+		
+		((BackAndForthPattern)humans.get(humans.size() - 1).getMovementPattern()).goToDest();
+		
+		// Galway game jam room
+		int[] chairRowLocs = {66, 155, 214, 307};
+		
+		for (int i = 0; i < chairRowLocs.length; ++i) {
+			for (int j = 0; j < 6; ++j) {
+				humans.add(new Human(
+					867 + (j * 50),
+					chairRowLocs[i],
+					Human.DEFAULT_SPEED,
+					new StaticPattern((i % 2 == 0 ? (2 * Math.PI) * 0.25 : (2 * Math.PI* 0.75))),
+					30));
+			}
+		}
+		
+		humans.add(new Human(1308, 260, new SpinAroundPattern(SpinAroundPattern.DEFAULT_ANGVEL * 4)));
+		
+		final int longSightDist = 1000;
+		humans.add(new Human(1637, 833, 0,
+				new SpinAroundPattern(-(SpinAroundPattern.DEFAULT_ANGVEL)), longSightDist, 10));
+		humans.add(new Human(1741, 863, 0,
+				new SpinAroundPattern(-(SpinAroundPattern.DEFAULT_ANGVEL)), longSightDist, 10));
 		
 		playerMovingMusic = new Music("res/music/PlayerMoving.ogg");
 		playerMovingMusic.play();
 		playerMovingMusic.pause();
+		
+		caughtSound = new Sound("res/sound/Caught.ogg");
 	}
 
 	@Override
@@ -82,7 +117,7 @@ public class PlayingState extends TransferableState {
 			}
 			
 			if (input.rotateNewlyPressed) {
-				player.tryRotate(currentLevel);
+				player.tryRotate(currentLevel, true);
 			}
 			
 			player.tick(currentLevel);
@@ -102,6 +137,12 @@ public class PlayingState extends TransferableState {
 					playerMovingMusic.pause();
 					movingMusicPlaying = false;
 				}
+			}
+			
+			// check for win
+			if (player.getX() >= 1933 && player.getX() <= 2258
+			 && player.getY() >= 29 && player.getY() <= 112) {
+				this.enterState(1);
 			}
 		}
 		
@@ -140,6 +181,7 @@ public class PlayingState extends TransferableState {
 	}
 	
 	public void onPlayerSpotted() {
+		caughtSound.play();
 		resetPlayerPosition();
 	}
 	

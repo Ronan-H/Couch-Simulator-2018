@@ -3,6 +3,8 @@ package ronan_hanley.galway_game_jam.nine.entity.furniture;
 import org.newdawn.slick.Animation;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.SlickException;
+import org.newdawn.slick.Sound;
 
 import ronan_hanley.galway_game_jam.nine.Game;
 import ronan_hanley.galway_game_jam.nine.entity.Camera;
@@ -12,6 +14,16 @@ import ronan_hanley.galway_game_jam.nine.level.Level;
 public abstract class Furniture extends MovingEntity {
 	private boolean isHorizontal;
 	private int imgOffsetX, imgOffsetY;
+	
+	private static Sound rotateSound = null;
+	
+	static {
+		try {
+			rotateSound = new Sound("res/sound/FurnitureRotate.ogg");
+		} catch (SlickException e) {
+			e.printStackTrace();
+		}
+	}
 	
 	public Furniture(int initialX, int initialY, double maxSpeed, Animation anim) {
 		super(initialX, initialY, maxSpeed, anim);
@@ -30,7 +42,7 @@ public abstract class Furniture extends MovingEntity {
 		}
 	}
 	
-	public void tryRotate(Level level) {
+	public void tryRotate(Level level, boolean playSound) {
 		switchWidthAndHeight();
 		
 		if (level.collides(this)) {
@@ -38,6 +50,8 @@ public abstract class Furniture extends MovingEntity {
 			switchWidthAndHeight();
 			return;
 		}
+		
+		if (playSound) rotateSound.play(1f, 0.3f);
 		
 		isHorizontal = !isHorizontal;
 		
@@ -57,7 +71,7 @@ public abstract class Furniture extends MovingEntity {
 	
 	public void resetRotation(Level level) {
 		if (!isHorizontal) {
-			tryRotate(level);
+			tryRotate(level, false);
 		}
 	}
 	

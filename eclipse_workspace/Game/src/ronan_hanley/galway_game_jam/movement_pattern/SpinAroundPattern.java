@@ -1,7 +1,7 @@
 package ronan_hanley.galway_game_jam.movement_pattern;
 
 public class SpinAroundPattern extends MovementPattern {
-	private static final double DEFAULT_ANGVEL = 0.01d;
+	public static final double DEFAULT_ANGVEL = 0.01d;
 	
 	private double angVel;
 	

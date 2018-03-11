@@ -3,3 +3,5 @@
 1520769941695	Rename type 'BackAndForthMovementPattern'
 1520769948230	Rename type 'UpDownMovementPattern'
 1520774120386	Move file
+1520788621314	Rename field 'upPhase'
+1520797840316	Rename local variable 'fov'

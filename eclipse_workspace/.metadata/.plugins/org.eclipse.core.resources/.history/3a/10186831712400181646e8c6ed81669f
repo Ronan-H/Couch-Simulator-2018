@@ -1,9 +1,0 @@
-package ronan_hanley.galway_game_jam.nine.level;
-
-public class Level {
-	
-	public Level() {
-		
-	}
-	
-}

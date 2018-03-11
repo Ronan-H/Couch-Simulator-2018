@@ -9,6 +9,7 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
 
+import ronan_hanley.galway_game_jam.nine.state.GameWonState;
 import ronan_hanley.galway_game_jam.nine.state.PlayingState;
 
 public class Game extends StateBasedGame {
@@ -31,6 +32,9 @@ public class Game extends StateBasedGame {
     public void initStatesList(GameContainer gc) throws SlickException {
     	// The first state added will be the one that is loaded first, when the application is launched
         addState(new PlayingState(this, input));
+        addState(new GameWonState(this, input));
+        
+        // enterState(1);
     }
 
     // Main Method
@@ -50,7 +54,7 @@ public class Game extends StateBasedGame {
             app.setMinimumLogicUpdateInterval(-1);
             app.setMaximumLogicUpdateInterval(updateInterval);
             app.setTargetFrameRate(FPS);
-            app.setShowFPS(true);
+            app.setShowFPS(false);
             
             /*
             DisplayMode[] modes = Display.getAvailableDisplayModes();

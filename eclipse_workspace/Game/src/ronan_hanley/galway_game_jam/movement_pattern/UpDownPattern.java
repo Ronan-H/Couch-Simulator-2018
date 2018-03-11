@@ -14,18 +14,18 @@ public class UpDownPattern extends BackAndForthPattern {
 		
 		h.goMaxSpeed();
 		
-		if (upPhase) {
+		if (forwardPhase) {
 			h.goUp();
 			
-			if (h.getY() < destY) {
-				upPhase = false;
+			if (h.getY() <= destY) {
+				forwardPhase = false;
 			}
 		}
 		else {
 			h.goDown();
 			
-			if (h.getY() > srcY) {
-				upPhase = true;
+			if (h.getY() >= srcY) {
+				forwardPhase = true;
 			}
 		}
 	}

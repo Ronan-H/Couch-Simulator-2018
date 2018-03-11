@@ -12,8 +12,12 @@
 <fullyQualifiedTypeName name="org.newdawn.slick.Image"/>
 <fullyQualifiedTypeName name="org.newdawn.slick.Graphics"/>
 <fullyQualifiedTypeName name="ronan_hanley.galway_game_jam.nine.entity.Entity"/>
-<fullyQualifiedTypeName name="ronan_hanley.galway_game_jam.nine.Game"/>
 <fullyQualifiedTypeName name="ronan_hanley.galway_game_jam.nine.entity.MovementPattern"/>
 <fullyQualifiedTypeName name="ronan_hanley.galway_game_jam.nine.level.Level"/>
+<fullyQualifiedTypeName name="java.lang.Math"/>
+<fullyQualifiedTypeName name="ronan_hanley.galway_game_jam.movement_pattern.SpinAroundPattern"/>
+<fullyQualifiedTypeName name="ronan_hanley.galway_game_jam.nine.Game"/>
 <fullyQualifiedTypeName name="org.newdawn.slick.Color"/>
+<fullyQualifiedTypeName name="org.newdawn.slick.Font"/>
+<fullyQualifiedTypeName name="java.awt.Font"/>
 </qualifiedTypeNameHistroy>

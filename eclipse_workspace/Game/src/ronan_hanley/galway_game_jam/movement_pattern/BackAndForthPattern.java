@@ -5,13 +5,13 @@ import ronan_hanley.galway_game_jam.nine.entity.Human;
 public abstract class BackAndForthPattern extends MovementPattern {
 	protected int srcX, srcY;
 	protected int destX, destY;
-	protected boolean upPhase;
+	protected boolean forwardPhase;
 	
 	public BackAndForthPattern(int destX, int destY) {
 		this.destX = destX;
 		this.destY = destY;
 		
-		upPhase = true;
+		forwardPhase = true;
 	}
 	
 	@Override
@@ -22,6 +22,11 @@ public abstract class BackAndForthPattern extends MovementPattern {
 		
 		srcX = human.getX();
 		srcY = human.getY();
+	}
+	
+	public void goToDest() {
+		getHuman().setX(destX);
+		getHuman().setY(destY);
 	}
 	
 }

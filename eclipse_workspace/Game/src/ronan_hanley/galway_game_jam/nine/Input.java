@@ -28,7 +28,10 @@ public class Input implements InputListener {
 		case KEY_D:
 			rightHeld = state;
 			break;
-		case KEY_SPACE:
+		case KEY_UP:
+		case KEY_DOWN:
+		case KEY_LEFT:
+		case KEY_RIGHT:
 			rotateHeld = state;
 			break;
 		}

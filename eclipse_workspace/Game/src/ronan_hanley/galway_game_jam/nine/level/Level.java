@@ -62,16 +62,18 @@ public class Level {
 	}
 	
 	public boolean collides(MovingEntity e) {
-		int fromX = e.getX();
-		int fromY = e.getY();
-		int toX = e.getX() + e.getWidth();
-		int toY = e.getY() + e.getHeight();
-		
-		for (int y = fromY; y < toY; ++y) {
-			for (int x = fromX; x < toX; ++x) {
-				int pixelIndex = (y * width) + x;
-				if (pixels[pixelIndex]) {
-					return true;
+		if (!Game.DEBUG) {
+			int fromX = e.getX();
+			int fromY = e.getY();
+			int toX = e.getX() + e.getWidth();
+			int toY = e.getY() + e.getHeight();
+			
+			for (int y = fromY; y < toY; ++y) {
+				for (int x = fromX; x < toX; ++x) {
+					int pixelIndex = (y * width) + x;
+					if (pixels[pixelIndex]) {
+						return true;
+					}
 				}
 			}
 		}
@@ -80,8 +82,8 @@ public class Level {
 	}
 	
 	public boolean inLineOfSight(Human human, Furniture f) {
-		final double angIncrement = human.getFov() / 10d;
-		final int rayJump = 3;
+		final double angIncrement = human.getFov() / 50d;
+		final int rayJump = 1;
 		
 		double rayX, rayY;
 		
@@ -92,7 +94,7 @@ public class Level {
 			
 			rayX = human.getX() + human.getHalfWidth();
 			rayY = human.getY() + human.getHalfHeight();
-			for (int rayLen = rayJump; rayLen < human.getSightDistance(); rayLen += rayJump) {
+			for (int rayLen = 0; rayLen < human.getSightDistance(); rayLen += rayJump) {
 				rayX += xInc;
 				rayY += yInc;
 				
