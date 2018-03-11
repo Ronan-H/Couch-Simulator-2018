@@ -1,11 +1,16 @@
 package ronan_hanley.galway_game_jam.nine.entity;
 
+import java.util.Random;
+
 public abstract class Entity {
 	private double x, y;
+	protected Random random;
 	
 	public Entity(int initialX, int initialY) {
 		setX(initialX);
 		setY(initialY);
+		
+		random = new Random();
 	}
 	
 	public int getX() {

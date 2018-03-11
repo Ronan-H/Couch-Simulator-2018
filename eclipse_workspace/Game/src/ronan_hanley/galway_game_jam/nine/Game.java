@@ -3,7 +3,7 @@ package ronan_hanley.galway_game_jam.nine;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 
-import org.lwjgl.opengl.GL11;
+import org.lwjgl.LWJGLException;
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.SlickException;
@@ -12,7 +12,7 @@ import org.newdawn.slick.state.StateBasedGame;
 import ronan_hanley.galway_game_jam.nine.state.PlayingState;
 
 public class Game extends StateBasedGame {
-	public static final boolean DEBUG = true;
+	public static final boolean DEBUG = false;
 	
     // Application Properties
 	public static final String GAME_NAME = "Couch Simulator 2018";
@@ -34,7 +34,7 @@ public class Game extends StateBasedGame {
     }
 
     // Main Method
-    public static void main(String[] args) {
+    public static void main(String[] args) throws LWJGLException {
         try {
         	final int updateInterval = 1000 / FPS;
         	final double windowFraction = 1;
@@ -51,6 +51,17 @@ public class Game extends StateBasedGame {
             app.setMaximumLogicUpdateInterval(updateInterval);
             app.setTargetFrameRate(FPS);
             app.setShowFPS(true);
+            
+            /*
+            DisplayMode[] modes = Display.getAvailableDisplayModes();
+            DisplayMode mode = modes[0];
+            
+            //System.out.println("Mode dims: " + mode.getWidth() + " " + mode.getHeight());
+            //System.exit(0);
+            
+            app.setDisplayMode(1920, screenSize.height, true);
+            */
+            
             app.setFullscreen(true);
             
             input = new Input();

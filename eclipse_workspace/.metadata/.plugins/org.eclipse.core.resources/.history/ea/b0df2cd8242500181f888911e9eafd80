@@ -1,0 +1,14 @@
+package ronan_hanley.galway_game_jam.movement_pattern;
+
+public class SpinAroundPattern extends MovementPattern {
+	private double angVel;
+	
+	public SpinAroundPattern(double angVel) {
+		this.angVel = angVel;
+	}
+	
+	public void tick() {
+		
+	}
+	
+}

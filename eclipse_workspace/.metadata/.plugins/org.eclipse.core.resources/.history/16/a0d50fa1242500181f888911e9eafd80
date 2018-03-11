@@ -1,0 +1,5 @@
+package ronan_hanley.galway_game_jam.movement_pattern;
+
+public class SpinAroundPattern extends MovementPattern {
+
+}

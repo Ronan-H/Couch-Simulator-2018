@@ -10,7 +10,7 @@ public class Couch extends Furniture {
 	static {
 		anim = new Animation();
 		try {
-			anim.addFrame(new Image("res/couch.png"), 1);
+			anim.addFrame(new Image("res/images/couch.png"), 1);
 		} catch (SlickException e) {
 			e.printStackTrace();
 		}

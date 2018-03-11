@@ -55,6 +55,12 @@ public abstract class Furniture extends MovingEntity {
 		}
 	}
 	
+	public void resetRotation(Level level) {
+		if (!isHorizontal) {
+			tryRotate(level);
+		}
+	}
+	
 	public void switchWidthAndHeight() {
 		int temp;
 		

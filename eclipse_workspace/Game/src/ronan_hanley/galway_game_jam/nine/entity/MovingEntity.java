@@ -94,6 +94,10 @@ public abstract class MovingEntity extends Entity {
 		}
 	}
 	
+	public void changeAngle(double change) {
+		setAngle(getAngle() + change);
+	}
+	
 	public int getWidth() {
 		return width;
 	}
@@ -140,6 +144,10 @@ public abstract class MovingEntity extends Entity {
 	
 	public void stop() {
 		speed = 0;
+	}
+	
+	public boolean isMoving() {
+		return speed != 0;
 	}
 	
 	public Animation getAnim() {
