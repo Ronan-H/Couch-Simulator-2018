@@ -80,18 +80,21 @@ public class Level {
 	}
 	
 	public boolean inLineOfSight(Human human, Furniture f) {
-		final double angIncrement = FULL_RAD_ROTATION / 72;
+		final double angIncrement = human.getFov() / 10d;
+		final int rayJump = 3;
 		
 		double rayX, rayY;
 		
 		for (double ang = -(human.getFov() /2); ang < human.getFov() / 2; ang += angIncrement) {
 			double newAng = (human.getAngle() + ang) % FULL_RAD_ROTATION;
+			double xInc = Math.cos(newAng) * rayJump;
+			double yInc = Math.sin(newAng) * rayJump;
 			
-			rayX = human.getX();
-			rayY = human.getY();
-			for (int rayLen = 1; rayLen < human.getSightDistance(); ++rayLen) {
-				rayX += Math.cos(newAng);
-				rayY += Math.sin(newAng);
+			rayX = human.getX() + human.getHalfWidth();
+			rayY = human.getY() + human.getHalfHeight();
+			for (int rayLen = rayJump; rayLen < human.getSightDistance(); rayLen += rayJump) {
+				rayX += xInc;
+				rayY += yInc;
 				
 				// check if the ray hits a wall
 				if (pixels[((int)rayY) * width + ((int)rayX)]) {
@@ -99,9 +102,8 @@ public class Level {
 				}
 				
 				// check if point is inside rectangle
-				Rectangle fRect = new Rectangle(f.getX(), f.getY(), f.getWidth(), f.getHeight());
-				
-				boolean rayIntersects = (fRect.contains((float) rayX, (float) rayY));
+				boolean rayIntersects = rayX >= f.getX() && rayX <= f.getX() + f.getWidth()
+									 && rayY >= f.getY() && rayY <= f.getY() + f.getHeight();
 				
 				if (rayIntersects) {
 					return true;

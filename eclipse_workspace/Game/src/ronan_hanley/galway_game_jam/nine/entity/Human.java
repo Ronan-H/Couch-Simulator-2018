@@ -51,9 +51,9 @@ public class Human extends MovingEntity {
 	@Override
 	public void render(Graphics g, Camera cam) {
 		// draw fov area
-		g.setColor(new Color(1f, 1f, 0f, 0.02f));
+		g.setColor(new Color(1f, 1f, 1f, 0.2f));
 		
-		double angIncrement = getFov() / 1000;
+		double angIncrement = getFov() / 100;
 		for (double ang = -(getFov() /2); ang < getFov() / 2; ang += angIncrement) {
 			double newAng = (getAngle() + ang) % FULL_RAD_ROTATION;
 			float destX = getX() + getHalfWidth() + (float) (Math.cos(newAng) * getSightDistance());
@@ -63,7 +63,7 @@ public class Human extends MovingEntity {
 			g.drawLine(getX() + getHalfWidth() - cam.getX(), getY() + getHalfHeight() - cam.getY(), destX - cam.getX(), destY - cam.getY());
 		}
 		
-		g.setLineWidth(1);
+		g.setLineWidth(3);
 		
 		super.render(g, cam);
 	}
@@ -78,6 +78,8 @@ public class Human extends MovingEntity {
 		
 		double dist = distanceTo(f);
 		
+		if (dist > sightDistance * allowance) return false;
+		
 		double angleTo = Math.atan2(f.getY() - getY(), f.getX() - getX());
 		
 		if (angleTo < 0) {
@@ -86,7 +88,7 @@ public class Human extends MovingEntity {
 		
 		double angleDiff = Math.abs(angleTo - getAngle()) % (2 * Math.PI);
 		
-		boolean inRange = angleDiff < (fov /2) * allowance && dist < sightDistance * allowance;
+		boolean inRange = angleDiff < (fov /2) * allowance;
 		
 		if (!inRange) {
 			return false;
