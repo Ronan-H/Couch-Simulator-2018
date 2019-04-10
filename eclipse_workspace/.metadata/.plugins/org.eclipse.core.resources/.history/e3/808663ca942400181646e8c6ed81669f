@@ -1,9 +1,0 @@
-package ronan_hanley.galway_game_jam.nine.entity;
-
-public class MovementPattern {
-	public static final int STATIC = 0;
-	public static final int UP_DOWN = 0;
-	public static final int LEFT_RIGHT = 0;
-	public static final int SPIN_AROUND = 0;
-	
-}

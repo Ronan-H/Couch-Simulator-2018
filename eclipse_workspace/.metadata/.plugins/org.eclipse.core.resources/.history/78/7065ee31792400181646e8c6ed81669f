@@ -1,9 +1,0 @@
-package ronan_hanley.galway_game_jam.nine.entity;
-
-public class Camera extends Entity {
-
-	public Camera(int initialX, int initialY) {
-		super(initialX, initialY);
-	}
-
-}
